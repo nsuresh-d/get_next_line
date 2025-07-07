@@ -43,7 +43,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int	j;
 	char	*new;
 
-	if (!s1 || !s2)
+	if (!s1)
+		s1 = "";
+	if (!s2)
 		return (NULL);
 	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!new)
@@ -64,22 +66,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new);
 }
 
-char	*ft_strdup(const char *s)
+char	*join_and_free(char *stash, char *buffer)
 {
-	int	i;
-	char	*new;
+	char	*joined;
 
-	if (!s)
-		return (NULL);
-	new = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		new[i] = s[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
+	joined = ft_strjoin(stash, buffer);
+	free(stash);
+	return (joined);
 }
