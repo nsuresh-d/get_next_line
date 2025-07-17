@@ -30,7 +30,7 @@ char	*get_next_line(int fd)
 static char	*find_newline(int fd, char *stash)
 {
 	char	*buffer;
-	int	read_bytes;
+	int		read_bytes;
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
@@ -59,7 +59,7 @@ static char	*find_newline(int fd, char *stash)
 static char	*cut_until_nl(char *stash)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	if (!stash || stash[0] == '\0')
 		return (NULL);
@@ -82,11 +82,12 @@ static char	*cut_until_nl(char *stash)
 	line[i] = '\0';
 	return (line);
 }
+
 static char	*update_stash(char *stash)
 {
 	char	*new_stash;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
@@ -101,7 +102,7 @@ static char	*update_stash(char *stash)
 	if (!new_stash)
 		return (NULL);
 	j = 0;
-	while (stash[i]) 
+	while (stash[i])
 		new_stash[j++] = stash[i++];
 	new_stash[j] = '\0';
 	free(stash);
