@@ -12,21 +12,6 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
-{
-	static char	*stash;
-	char		*line;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	stash = find_newline(fd, stash);
-	if (!stash)
-		return (NULL);
-	line = cut_until_nl(stash);
-	stash = update_stash(stash);
-	return (line);
-}
-
 static char	*find_newline(int fd, char *stash)
 {
 	char	*buffer;
@@ -107,4 +92,19 @@ static char	*update_stash(char *stash)
 	new_stash[j] = '\0';
 	free(stash);
 	return (new_stash);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stash;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stash = find_newline(fd, stash);
+	if (!stash)
+		return (NULL);
+	line = cut_until_nl(stash);
+	stash = update_stash(stash);
+	return (line);
 }

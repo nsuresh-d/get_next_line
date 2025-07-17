@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -26,6 +28,8 @@ char	*ft_strchr(const char *str, int c)
 {
 	int	i;
 
+	if (!str)
+		return (NULL);
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -71,6 +75,13 @@ char	*join_and_free(char *stash, char *buffer)
 {
 	char	*joined;
 
+	if (!stash)
+	{
+		stash = malloc(1);
+		if (!stash)
+			return (NULL);
+		stash[0] = '\0';
+	}
 	joined = ft_strjoin(stash, buffer);
 	free(stash);
 	return (joined);
